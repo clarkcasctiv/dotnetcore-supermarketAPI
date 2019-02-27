@@ -35,6 +35,26 @@ namespace Supermarket.API.Domain.Persistence.Contexts
             builder.Entity<Product>().Property(p => p.Quantity).IsRequired();
             builder.Entity<Product>().Property(p => p.UnitOfMeasurement).IsRequired();
 
+            builder.Entity<Product>().HasData(
+                new Product
+                {
+                    Id = 100,
+                    Name = "Apple",
+                    Quantity = 1,
+                    UnitOfMeasurement = EUnitOfMeasurement.Unity,
+                    CategoryId = 100
+
+                },
+                new Product
+                {
+                    Id = 101,
+                    Name = "Milk",
+                    Quantity = 2,
+                    UnitOfMeasurement = EUnitOfMeasurement.Liter,
+                    CategoryId = 101
+                }
+            )
+
         }
 
     }
