@@ -7,5 +7,7 @@ namespace Supermarket.API.Domain.Persistence.Repositories
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> ListAsync();
+
+        Task AddAsync(Category category);
     }
 }
