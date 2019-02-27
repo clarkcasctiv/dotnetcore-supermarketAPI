@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Supermarket.API.Domain.Persistence.Contexts;
 using Supermarket.API.Domain.Persistence.Repositories;
+using Supermarket.API.Domain.Repositories;
 using Supermarket.API.Domain.Services;
 
 namespace Supermarket.API
@@ -40,6 +41,8 @@ namespace Supermarket.API
             services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper();
 

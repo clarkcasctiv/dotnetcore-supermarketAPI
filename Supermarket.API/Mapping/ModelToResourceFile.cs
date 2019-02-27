@@ -4,9 +4,9 @@ using Supermarket.API.Resources;
 
 namespace Supermarket.API.Mapping
 {
-    public class ModelToResouceFile : Profile
+    public class ModelToResourceFile : Profile
     {
-        public ModelToResouceFile()
+        public ModelToResourceFile()
         {
             CreateMap<Category, CategoryResource>();
 
