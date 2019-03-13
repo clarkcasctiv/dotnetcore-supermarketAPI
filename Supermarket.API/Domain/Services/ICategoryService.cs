@@ -5,6 +5,7 @@ using Supermarket.API.Domain.Services.Communication;
 
 namespace Supermarket.API.Domain.Services
 {
+    // An interface tells how something should work, but does not implement the real logic for the behavior. 
     public interface ICategoryService
     {
         Task<IEnumerable<Category>> ListAsync();

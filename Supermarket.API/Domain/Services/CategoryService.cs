@@ -43,6 +43,7 @@ namespace Supermarket.API.Domain.Services
 
         public async Task<IEnumerable<Category>> ListAsync()
         {
+            // await keyword for tasks that can take a while
             return await _categoryRepository.ListAsync();
         }
 

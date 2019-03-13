@@ -6,7 +6,6 @@ namespace Supermarket.API.Domain.Models
         public string Name { get; set; }
         public short Quantity { get; set; }
         public EUnitOfMeasurement UnitOfMeasurement { get; set; }
-
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
