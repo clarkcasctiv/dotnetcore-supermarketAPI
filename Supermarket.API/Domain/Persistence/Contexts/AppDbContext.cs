@@ -1,12 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using Supermarket.API.Domain.Models;
+using Supermarket.API.Domain.Services.Security;
 
 namespace Supermarket.API.Domain.Persistence.Contexts
 {
     public class AppDbContext : DbContext
     {
+        // private readonly IPasswordHasher passwordHasher;
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
+
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -55,6 +61,17 @@ namespace Supermarket.API.Domain.Persistence.Contexts
                }
            );
 
+            // builder.Entity<Role>().HasData(
+            //     new Role { Name = ERole.Common.ToString() },
+            //     new Role { Name = ERole.Administrator.ToString() }
+            // );
+
+            // builder.Entity<User>().HasData(
+            //     new User { Email = "admin@mail.com", Password = "ACObsBdohUONmrQVm94+VjO1rtHQ934BbnCsDztZOodctuaXEb+1gAoFmvjSQlirEg==" },
+            //     new User { Email = "user@mail.com", Password = "AGt9K+7F9PsSovlUc+ChGR7/oZPcJdH1tVB4I9WJjOpQM9LjI1c6mK3tbo38ZVin4A=" }
+            // );
+
+            builder.Entity<UserRole>().HasKey(ur => new { ur.UserId, ur.RoleId });
 
 
         }
