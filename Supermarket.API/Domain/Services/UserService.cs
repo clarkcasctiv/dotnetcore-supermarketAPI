@@ -20,7 +20,7 @@ namespace Supermarket.API.Domain.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<CreateUserResponse> CreateAsync(User user, params ERole[] userRoles)
+        public async Task<CreateUserResponse> CreateUserAsync(User user, params ERole[] userRoles)
         {
             var existinguser = await _userRepository.FindByEmailAsync(user.Email);
             if (existinguser != null)
@@ -40,6 +40,5 @@ namespace Supermarket.API.Domain.Services
         {
             return await _userRepository.FindByEmailAsync(email);
         }
-
     }
 }

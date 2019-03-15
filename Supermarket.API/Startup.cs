@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Supermarket.API.Domain.Models.Tokens;
 using Supermarket.API.Domain.Persistence.Contexts;
@@ -35,10 +29,12 @@ namespace Supermarket.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<AppDbContext>(options =>
+            //{
+            //    options.UseInMemoryDatabase("supermarket-api-in-memory");
+            //});
             services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseInMemoryDatabase("supermarket-api-in-memory");
-            });
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
 
@@ -77,17 +73,12 @@ namespace Supermarket.API
                     ValidAudience = tokenOptions.Audience,
                     IssuerSigningKey = signingConfigurations.Key,
                     ClockSkew = TimeSpan.Zero
-
-
                 };
-
             });
 
             services.AddAutoMapper();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

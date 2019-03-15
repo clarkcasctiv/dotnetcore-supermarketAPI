@@ -6,7 +6,7 @@ namespace Supermarket.API.Domain.Services
 {
     public interface IUserService
     {
-        Task<CreateUserResponse> CreateAsync(User user, params ERole[] userRoles);
+        Task<CreateUserResponse> CreateUserAsync(User user, params ERole[] userRoles);
 
         Task<User> FindByEmailAsync(string email);
     }

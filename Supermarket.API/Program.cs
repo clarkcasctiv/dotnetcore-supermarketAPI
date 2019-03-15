@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Supermarket.API.Domain.Persistence.Contexts;
 using Supermarket.API.Domain.Services.Security;
 
@@ -20,17 +13,17 @@ namespace Supermarket.API
             var host = BuildWebHost(args);
 
             using (var scope = host.Services.CreateScope())
-            // {
-            //     var services = scope.ServiceProvider;
-            //     var context = services.GetService<AppDbContext>();
-            //     var passwordHasher = services.GetService<IPasswordHasher>();
-            //     DatabaseSeed.Seed(context, passwordHasher);
-            // }
-
-            using (var context = scope.ServiceProvider.GetService<AppDbContext>())
             {
-                context.Database.EnsureCreated();
+                var services = scope.ServiceProvider;
+                var context = services.GetService<AppDbContext>();
+                var passwordHasher = services.GetService<IPasswordHasher>();
+                DatabaseSeed.Seed(context, passwordHasher);
             }
+
+            //using (var context = scope.ServiceProvider.GetService<AppDbContext>())
+            //{
+            //    context.Database.EnsureCreated();
+            //}
 
             host.Run();
             // CreateWebHostBuilder(args).Build().Run();

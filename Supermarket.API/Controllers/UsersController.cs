@@ -13,12 +13,14 @@ namespace Supermarket.API.Controllers
         private readonly IMapper _mapper;
 
         private readonly IUserService _userService;
+
         public UsersController(IMapper mapper, IUserService userService)
         {
             _mapper = mapper;
             _userService = userService;
-
         }
+
+        [HttpPost]
         public async Task<IActionResult> CreateAsync([FromBody] UserCredentialsResource userCredentials)
         {
             if (!ModelState.IsValid)
@@ -28,7 +30,7 @@ namespace Supermarket.API.Controllers
 
             var user = _mapper.Map<UserCredentialsResource, User>(userCredentials);
 
-            var response = await _userService.CreateAsync(user, ERole.Common);
+            var response = await _userService.CreateUserAsync(user, ERole.Common);
             if (!response.Success)
             {
                 return BadRequest(response.Message);
@@ -36,7 +38,6 @@ namespace Supermarket.API.Controllers
 
             var userResource = _mapper.Map<User, UserResource>(response.User);
             return Ok(userResource);
-
         }
     }
 }

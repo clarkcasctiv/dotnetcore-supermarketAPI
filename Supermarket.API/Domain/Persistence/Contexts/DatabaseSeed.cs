@@ -21,39 +21,31 @@ namespace Supermarket.API.Domain.Persistence.Contexts
 
                 context.Roles.AddRange(roles);
                 context.SaveChanges();
-
             }
 
             if (context.Users.Count() == 0)
             {
                 var users = new List<User>
-                {
-                    //ACObsBdohUONmrQVm94+VjO1rtHQ934BbnCsDztZOodctuaXEb+1gAoFmvjSQlirEg==
-                    new User { Email = "admin@mail.com", Password = passwordHasher.HashPassword("123456")},
-                    //AGt9K+7F9PsSovlUc+ChGR7/oZPcJdH1tVB4I9WJjOpQM9LjI1c6mK3tbo38ZVin4A==
-                    new User { Email = "user@mail.com", Password = passwordHasher.HashPassword("123456")}
+                    {
+                        new User { Email = "admin@mail.com", Password = passwordHasher.HashPassword("123456")},
+                        new User { Email = "user@mail.com", Password = passwordHasher.HashPassword("123456")}
+                    };
 
+                //users[0].UserRoles.Add(new UserRole
+                //{
+                //    //RoleId = context.Roles.SingleOrDefault(r => r.Name == ERole.Administrator.ToString()).Id
+                //    RoleId = 2
+                //});
 
-                };
-
-                users[0].UserRoles.Add(new UserRole
-                {
-                    RoleId = context.Roles.SingleOrDefault(r => r.Name == ERole.Administrator.ToString()).Id
-
-                });
-
-                users[1].UserRoles.Add(new UserRole
-                {
-                    RoleId = context.Roles.SingleOrDefault(r => r.Name == ERole.Common.ToString()).Id
-
-                });
+                //users[1].UserRoles.Add(new UserRole
+                //{
+                //    //RoleId = context.Roles.SingleOrDefault(r => r.Name == ERole.Common.ToString()).Id
+                //    RoleId = 1
+                //});
 
                 context.Users.AddRange(users);
                 context.SaveChanges();
             }
-
-
-
         }
     }
 }
